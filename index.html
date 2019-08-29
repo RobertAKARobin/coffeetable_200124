@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Test</title>
+	<link rel="stylesheet" href="/styles.css" />
+	<!-- Coffeetable -->
+	<script src="/lib/prototypes.js"></script>
+	<script src="/src/coffeetable.js"></script>
+	<script src="/src/collection.js"></script>
+	<script src="/src/record.js"></script>
+
+	<!-- Views -->
+	<script src="/node_modules/mithril/mithril.js"></script>
+	<script src="/src/collection.views.js"></script>
+
+	<!-- Testing -->
+	<script src="/node_modules/mithril/ospec/ospec.js"></script>
+	<script src="/lib/prototypes.spec.js"></script>
+	<script src="/src/collection.spec.js"></script>
+	<script src="/src/record.spec.js"></script>
+	<script src="/src/_base.views.spec.js"></script>
+	<script>
+		window.addEventListener('DOMContentLoaded', () => {
+			window.doDebug = false
+			m.request({
+				url: '/data.json'
+			}).then(data=>{
+				window.Data = Object.freeze(data)
+				o.run()
+			})
+		})
+	</script>
+</head>
+
+<body>
+	<div id="app-output"></div>
+</body>
+
+</html>

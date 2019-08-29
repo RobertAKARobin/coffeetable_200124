@@ -1,0 +1,28 @@
+{
+	"columnNames": [
+		"name",
+		"age",
+		"cats",
+		"isFriendly"
+	],
+	"records": [
+		{
+			"name": "Alice",
+			"age": 40,
+			"cats": 3,
+			"isFriendly": true
+		},
+		{
+			"name": "Bob",
+			"age": 20,
+			"cats": 0,
+			"isFriendly": false
+		},
+		{
+			"name": "Carol",
+			"age": 10,
+			"cats": 1,
+			"isFriendly": true
+		}
+	]
+}
