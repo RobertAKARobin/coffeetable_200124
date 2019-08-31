@@ -5,7 +5,7 @@ Collection.component = {
 			m('[data-head]', [
 				m('[data-row]', [
 					m('div'),
-					collection.getColumnNames().map(columnName=>m('div', columnName))
+					collection.getFieldNames().map(fieldName=>m('div', fieldName))
 				])
 			]),
 			m('[data-body]', [
@@ -18,7 +18,7 @@ Collection.component = {
 							onclick: ()=>collection.removeRecord(record)
 						}, 'Remove')
 					]),
-					record.getColumns().map(value=>m('div', value === false ? 'false' : value))
+					record.getFields().map(value=>m('div', value === false ? 'false' : value))
 				]))
 			])
 		])

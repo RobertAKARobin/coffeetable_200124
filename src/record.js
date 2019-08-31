@@ -70,7 +70,7 @@ Object.defineProperties(Record, {
 	}
 })
 Object.defineProperties(Record.prototype, {
-	getColumns: {
+	getFields: {
 		value: function(input){
 			if(arguments.length === 0){
 				const collection = this.getCollection()
@@ -84,16 +84,16 @@ Object.defineProperties(Record.prototype, {
 			if(data === undefined || data === null){
 				data = {}
 			}
-			let columnNames
+			let fieldNames
 			if(input instanceof Collection){
 				const collection = input
-				columnNames = collection.getColumnNames()
+				fieldNames = collection.getFieldNames()
 			}else if(input instanceof Array){
-				columnNames = input
+				fieldNames = input
 			}else{
-				columnNames = [input]
+				fieldNames = [input]
 			}
-			return columnNames.extractFrom(data)
+			return fieldNames.extractFrom(data)
 		}
 	},
 	toJSON: {

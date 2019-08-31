@@ -64,50 +64,50 @@ o.spec('Record', ()=>{
 		o.beforeEach(()=>{
 			record = Record.create()
 		})
-		o.spec('.getColumns', ()=>{
+		o.spec('.getFields', ()=>{
 			let collection
 			o.beforeEach(()=>{
 				collection = Collection.create()
 				collection.addRecord(record)
-				collection.setColumnNames(['foo', 'bar'])
+				collection.setFieldNames(['foo', 'bar'])
 			})
 			o.spec('()', ()=>{
 				o('when has collection', ()=>{
 					record.setData({foo: 'fizz'})
-					o(record.getColumns()).deepEquals(['fizz', undefined])
+					o(record.getFields()).deepEquals(['fizz', undefined])
 	
 					record.setData({foo: undefined})
-					o(record.getColumns()).deepEquals([undefined, undefined])
+					o(record.getFields()).deepEquals([undefined, undefined])
 	
-					record.setData({foo: 'fizz', unusedColumn: 'aaa'})
-					o(record.getColumns()).deepEquals(['fizz', undefined])
+					record.setData({foo: 'fizz', unusedField: 'aaa'})
+					o(record.getFields()).deepEquals(['fizz', undefined])
 				})
 				o('when has no collection', ()=>{
 					record.setData({foo: 'fizz'})
 					record.setCollection()
-					o(record.getColumns()).deepEquals([])
+					o(record.getFields()).deepEquals([])
 				})
 			})
 			o('(@currentCollection)', ()=>{
 				record.setData({foo: 'fizz'})
-				o(record.getColumns(record.getCollection())).deepEquals(record.getColumns())
+				o(record.getFields(record.getCollection())).deepEquals(record.getFields())
 			})
 			o('(@otherCollection)', ()=>{
 				record.setData({foo: 'fizz'})
 				record.setCollection()
 				o(record.getCollection()).equals(undefined)
-				o(record.getColumns(collection)).deepEquals(['fizz', undefined])
+				o(record.getFields(collection)).deepEquals(['fizz', undefined])
 			})
 			o('(@number)', ()=>{
-				o(record.getColumns(3)).deepEquals([undefined])
-				o(record.getColumns([3, 4])).deepEquals([undefined, undefined])
+				o(record.getFields(3)).deepEquals([undefined])
+				o(record.getFields([3, 4])).deepEquals([undefined, undefined])
 			})
 			o('(undefined)', ()=>{
-				o(record.getColumns(undefined)).deepEquals([undefined])
+				o(record.getFields(undefined)).deepEquals([undefined])
 			})
 			o('(@string)', ()=>{
 				record.setData({foo: 'fizz'})
-				o(record.getColumns('foo')).deepEquals(['fizz'])
+				o(record.getFields('foo')).deepEquals(['fizz'])
 			})
 		})
 		o.spec('.setCollection', ()=>{

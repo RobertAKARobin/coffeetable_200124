@@ -1,5 +1,5 @@
 {
-	"columnNames": [
+	"fieldNames": [
 		"name",
 		"age",
 		"cats",

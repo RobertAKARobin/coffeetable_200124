@@ -7,7 +7,7 @@ function Collection(input){
 Collection.definePrivateScopeAccessors = function(){
 	const pvt = {
 		records: [],
-		columnNames: []
+		fieldNames: []
 	}
 	Object.defineProperties(this, {
 		addRecord: {
@@ -36,9 +36,9 @@ Collection.definePrivateScopeAccessors = function(){
 				return this
 			}
 		},
-		getColumnNames: {
+		getFieldNames: {
 			value: function(){
-				return Array.from(pvt.columnNames)
+				return Array.from(pvt.fieldNames)
 			}
 		},
 		getRecords: {
@@ -66,16 +66,16 @@ Collection.definePrivateScopeAccessors = function(){
 				return this
 			}
 		},
-		setColumnNames: {
+		setFieldNames: {
 			value: function(input){
 				if(input instanceof Array){
-					pvt.columnNames = Array.from(input)
+					pvt.fieldNames = Array.from(input)
 				}else if(typeof input === 'string' || typeof input === 'number'){
-					pvt.columnNames = [input]
+					pvt.fieldNames = [input]
 				}else if(input === undefined || input === null || input === false){
-					pvt.columnNames = []
+					pvt.fieldNames = []
 				}else{
-					throw Coffeetable.rejectInputError('@collection.setColumnNames', input)
+					throw Coffeetable.rejectInputError('@collection.setFieldNames', input)
 				}
 				return this
 			}
@@ -95,22 +95,22 @@ Object.defineProperties(Collection.prototype, {
 			return Record.create(inputData, this, inputPlace)
 		}
 	},
-	getColumns: {
+	getFields: {
 		value: function(input){
-			let columnNames
+			let fieldNames
 			if(arguments.length === 0){
-				columnNames = this.getColumnNames()
+				fieldNames = this.getFieldNames()
 			}else{
 				if(input instanceof Collection){
 					const collection = input
-					columnNames = collection.getColumnNames()
+					fieldNames = collection.getFieldNames()
 				}else if(input instanceof Array){
-					columnNames = input
+					fieldNames = input
 				}else{
-					columnNames = [input]
+					fieldNames = [input]
 				}	
 			}
-			return this.getRecords().map(record=>record.getColumns(columnNames))
+			return this.getRecords().map(record=>record.getFields(fieldNames))
 		}
 	},
 	getData: {

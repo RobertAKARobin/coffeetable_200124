@@ -151,20 +151,20 @@ o.spec('Collection', ()=>{
 				o(collection.getData()).deepEquals(initialData.concat(secondCollectionInitialData))
 			})
 		})
-		o.spec('.getColumns', ()=>{
+		o.spec('.getFields', ()=>{
 			let collection
 			o.spec('when no existing records', ()=>{
 				o.beforeEach(()=>{
 					collection = Collection.create()
 				})
 				o('()', ()=>{
-					o(collection.getColumns()).deepEquals([])
+					o(collection.getFields()).deepEquals([])
 
-					collection.setColumnNames(['foo', 'bar'])
-					o(collection.getColumns()).deepEquals([])
+					collection.setFieldNames(['foo', 'bar'])
+					o(collection.getFields()).deepEquals([])
 				})
 				o('(@number)', ()=>{
-					o(collection.getColumns(3)).deepEquals([])
+					o(collection.getFields(3)).deepEquals([])
 				})
 			})
 			o.spec('when has existing records', ()=>{
@@ -178,62 +178,62 @@ o.spec('Collection', ()=>{
 					recordD = Record.create('recordD')
 					records = [recordA, recordB, recordC, recordD]
 					collection = Collection.create(records)
-					collection.setColumnNames(['foo', 'zoo'])
+					collection.setFieldNames(['foo', 'zoo'])
 				})
 				o('()', ()=>{
-					let returnValue = collection.getColumns()
+					let returnValue = collection.getFields()
 					o(returnValue instanceof Array).equals(true)
 					o(returnValue.length).equals(records.length)
 					o(returnValue[0]).deepEquals(['aaa', undefined])
 					o(returnValue[1]).deepEquals(['bbb', undefined])
 					o(returnValue[2]).deepEquals([undefined, undefined])
 	
-					collection.setColumnNames()
-					returnValue = collection.getColumns()
+					collection.setFieldNames()
+					returnValue = collection.getFields()
 					o(returnValue.length).equals(records.length)
 					o(returnValue[0]).deepEquals([])
 					o(returnValue[1]).deepEquals([])
 					o(returnValue[2]).deepEquals([])
 
-					collection.setColumnNames(['bizz'])
-					returnValue = collection.getColumns()
+					collection.setFieldNames(['bizz'])
+					returnValue = collection.getFields()
 					o(returnValue[0]).deepEquals([undefined])
 					o(returnValue[1]).deepEquals(['fuzz'])
 				})
 				o('(@self)', ()=>{
-					let returnValue = collection.getColumns(collection)
+					let returnValue = collection.getFields(collection)
 					o(returnValue[0]).deepEquals(['aaa', undefined])
 					o(returnValue[1]).deepEquals(['bbb', undefined])
 					o(returnValue[2]).deepEquals([undefined, undefined])
 				})
 				o('(@otherCollection)', ()=>{
 					const otherCollection = Collection.create()
-					otherCollection.setColumnNames(['foo'])
-					let returnValue = collection.getColumns(otherCollection)
+					otherCollection.setFieldNames(['foo'])
+					let returnValue = collection.getFields(otherCollection)
 					o(returnValue[0]).deepEquals(['aaa'])
 					o(returnValue[1]).deepEquals(['bbb'])
 					o(returnValue[2]).deepEquals([undefined])
 				})
 				o('(@string)', ()=>{
-					let returnValue = collection.getColumns('foo')
+					let returnValue = collection.getFields('foo')
 					o(returnValue[0]).deepEquals(['aaa'])
 					o(returnValue[1]).deepEquals(['bbb'])
 					o(returnValue[2]).deepEquals([undefined])
 
-					returnValue = collection.getColumns('bar')
+					returnValue = collection.getFields('bar')
 					o(returnValue[0]).deepEquals([undefined])
 					o(returnValue[1]).deepEquals([undefined])
 					o(returnValue[2]).deepEquals([undefined])
 				})
 				o('(@number)', ()=>{
-					let returnValue = collection.getColumns(5)
+					let returnValue = collection.getFields(5)
 					o(returnValue[0]).deepEquals([undefined])
 					o(returnValue[1]).deepEquals([undefined])
 					o(returnValue[2]).deepEquals([undefined])
 					o(returnValue[3]).deepEquals(['d'])
 				})
 				o('(@array)', ()=>{
-					let returnValue = collection.getColumns(['foo', 'bar'])
+					let returnValue = collection.getFields(['foo', 'bar'])
 					o(returnValue[0]).deepEquals(['aaa', undefined])
 					o(returnValue[1]).deepEquals(['bbb', undefined])
 					o(returnValue[2]).deepEquals([undefined, undefined])
@@ -283,41 +283,41 @@ o.spec('Collection', ()=>{
 				})
 			})
 		})
-		o.spec('.setColumnNames', ()=>{
+		o.spec('.setFieldNames', ()=>{
 			let collection
 			o.beforeEach(()=>{
 				collection = Collection.create()
 			})
 			o('()', ()=>{
-				const returnValue = collection.setColumnNames()
+				const returnValue = collection.setFieldNames()
 				o(returnValue).equals(collection)
-				o(collection.getColumnNames()).deepEquals([])
+				o(collection.getFieldNames()).deepEquals([])
 			})
 			o('(@number)', ()=>{
 				const input = 3
-				collection.setColumnNames(input)
-				o(collection.getColumnNames()).deepEquals([input])
+				collection.setFieldNames(input)
+				o(collection.getFieldNames()).deepEquals([input])
 			})
 			o('(@string)', ()=>{
 				const input = 'foo'
-				collection.setColumnNames(input)
-				o(collection.getColumnNames()).deepEquals([input])
+				collection.setFieldNames(input)
+				o(collection.getFieldNames()).deepEquals([input])
 			})
 			o('(@object)', ()=>{
 				const input = {}
-				o(()=>collection.setColumnNames(input)).throws(TypeError)
+				o(()=>collection.setFieldNames(input)).throws(TypeError)
 			})
 			o('(@array[])', ()=>{
 				const input = []
-				collection.setColumnNames(input)
-				o(collection.getColumnNames()).deepEquals(input)
-				o(collection.getColumnNames()).notEquals(input)
+				collection.setFieldNames(input)
+				o(collection.getFieldNames()).deepEquals(input)
+				o(collection.getFieldNames()).notEquals(input)
 			})
 			o('(@array[@number])', ()=>{
 				const input = [0, 1, 2]
-				collection.setColumnNames(input)
-				o(collection.getColumnNames()).deepEquals(input)
-				o(collection.getColumnNames()).notEquals(input)
+				collection.setFieldNames(input)
+				o(collection.getFieldNames()).deepEquals(input)
+				o(collection.getFieldNames()).notEquals(input)
 			})
 		})
 	})
